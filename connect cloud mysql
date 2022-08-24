@@ -1,0 +1,25 @@
+/*Grant root user permission to log in to any ip address,set up host to %*/ 
+
+use mysql;
+
+select user,host from user;
+
+UPDATE user SET host = '%' WHERE user = 'root' AND host = 'localhost';
+
+GRANT ALL PRIVILEGES ON *.* TO'root'@'%' IDENTIFIED BY '密码' WITH GRANT OPTION;
+
+flush privileges;
+
+
+
+
+/*Login with password instead of socket authentication*/
+
+
+SELECT User, Host, plugin FROM mysql.user；
+USE mysql;
+UPDATE user SET plugin='mysql_native_password' WHERE User='root';
+FLUSH PRIVILEGES;
+exit;
+
+/*finish ,use ssh , user ,ip login in */
