@@ -1,0 +1,15 @@
+首先 先用QT调用java中的代码，采用JDBC连接；
+
+CPP调用java代码步骤
+  1 在QT apk中生成AndroidManifest.xml文件并授予网络访问权限
+  2 在项目文件目录下的androidset文件下创建src文件夹---> con 文件夹--->存放java代码的文件夹---->代码
+  3 新建一个目录libs，将所使用的jdbc的jar包放在libs目录下
+  4  下面开始在CPP文件中调用java代码
+        1 引入QAndroidJniObject 类，并创建一个QAndroidJniObject androidJniObject=QtAndroid::androidActivity();
+        2 确定传入java代码中的参数 QAndroidJniObject JavaUSERNAME = QAndroidJniObject::fromString(Qstring  string).object<jstring>();
+         将Qstring类型转换为java的String类型
+        3 mactivity.callStaticObjectMethod("com/javaForcpp/UserLogin","setUsername","(Ljava/lang/String;)Ljava/lang/String;",javaUSENAME);
+                                            “某个java源文件”            某个静态函数    返回值类型（参数1类型，参数二类型）     传入的java字符串参数 
+        4 可以在Qt文件中用 QAndroidJniObject对象获得3的某个静态函数的返回值
+        
+  
